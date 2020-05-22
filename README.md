@@ -1,3 +1,4 @@
+<marl>Estaria bueno que se arregle el ultimo commit porque hay un cartel raro</mark>
 # prog3
 este es el tercer repo que hago en 20 minutos porque soy un desastre con git xD
 # Criterio de DONE
