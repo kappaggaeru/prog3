@@ -6,10 +6,10 @@ public class Dia {
 	private int maxCapacidad;
 	private ArrayList<Familia> familias;
 	public Dia(int max, int id) {
-		this.capacidad = id;
+		this.id = id;
 		this.capacidad = 0;
-		this.familias = new ArrayList<>();
 		this.maxCapacidad = max;
+		this.familias = new ArrayList<>();
 	}
 	public int getCapacidad() {
 		return this.capacidad;
@@ -29,9 +29,14 @@ public class Dia {
 	}
 	public boolean estaCompleto() {
 		return this.capacidad == this.maxCapacidad;
+//		|| this.capacidad == this.maxCapacidad-1;
 	}
 	public boolean aceptaFamilia(Familia f) {
 		return (f.miembros() + this.capacidad < this.maxCapacidad) && 
 				(!this.familias.contains(f));
+	}
+	public FamiliasIterator familiasIterator() {
+		ArrayList<Familia> res = this.familias;
+		return new FamiliasIterator(res);
 	}
 }

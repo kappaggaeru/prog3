@@ -85,4 +85,7 @@ public class Familia {
 	public int cantDiasPreferidos() {
 		return this.diasPreferidos.length;
 	}
+	public int bono() {
+		return this.calcularBono(this.diaAsignado);
+	}
 }
