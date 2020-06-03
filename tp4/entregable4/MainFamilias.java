@@ -1,28 +1,21 @@
 package entregable4;
 import java.util.ArrayList;
 import java.util.Collections;
-
-
 public class MainFamilias {
-
-//	static ArrayList<Dia> solucion = new ArrayList<>();
+	static Solucion solucion = new Solucion();
 	public static void main(String[] args) {
 		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias.csv");
 		ArrayList<Familia> familias = reader.read();
 		Taller musk = new Taller(340,100);
-		int bonos = greedy(familias, musk);
+		solucion.setBonos(greedy(familias, musk));
 		printCronograma(musk);
-		
-		
-//		for(Familia f:familias) {
-//			System.out.println(f+" Bono: $"+f.bono());
-//		}
-		System.out.println("Bonos: $"+bonos);
+		System.out.println("Bonos: $"+solucion.getBonos());
+		System.out.println("Familias asignadas: "+solucion.getFamilias());
+		System.out.println("Días completos: "+solucion.getDiasCompletos());
+		System.out.println("Días incompletos: "+solucion.getDiasIncompletos());
 	}
 	public static int greedy(ArrayList<Familia> familias, Taller taller) {
 		int bonos = 0;
-//		int flotantes = 0;//familias sin asignar
-//		ordenarPorMasCaro(familias);
 		ordenarPorMiembros(familias);
 		for(Familia f: familias) {//recorre las 5000 familias
 			int i = 0;
@@ -33,25 +26,23 @@ public class MainFamilias {
 					dia.agregarFamilia(f);
 					f.asignarDia(dia.getId());
 					bonos += f.calcularBono(dia.getId());
-//					solucion.add(dia);
 				}else {
 					i++;
 				}
 			}
-//			if(!f.estaAsignada()) {
-//				flotantes++;
-//			}
+			if(f.estaAsignada()) {
+				solucion.setFamilias(1);
+			}
 		}
-//		int diasIncompletos = 0;
-//		DiasIterator it = taller.diasIterator();
-//		while(it.hasNext()) {
-//			Dia d = it.next();
-//			if(d.estaCompleto()) {
-//				diasIncompletos++;
-//			}
-//		}
-//		System.out.println("Días incompletos: "+diasIncompletos);
-//		System.out.println("Familias sin asignar: "+flotantes);
+		DiasIterator it = taller.diasIterator();
+		while(it.hasNext()) {
+			Dia d = it.next();
+			if(d.estaCompleto()) {
+				solucion.setDiasCompletos(1);;
+			}else {
+				solucion.setDiasIncompletos(1);
+			}
+		}
 		return bonos;
 	}
 	public static void mejora(Taller taller) {
@@ -62,7 +53,7 @@ public class MainFamilias {
 		DiasIterator itDias = musk.diasIterator();
 		while(itDias.hasNext()) {
 			Dia d = itDias.next();
-			System.out.println("Día: "+d.getId()+" Capacidad usada: "+d.getCapacidad());
+			System.out.println("Día: "+d.getId()+" Capacidad usada: "+d.getCapacidad()+" Cantidad de familias: "+d.totalFamilias());
 			System.out.print("Familias [");
 			FamiliasIterator itFlias = d.familiasIterator();
 			while(itFlias.hasNext()) {
