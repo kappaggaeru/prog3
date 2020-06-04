@@ -7,16 +7,29 @@ public class MainFamilias {
 		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias.csv");
 		ArrayList<Familia> familias = reader.read();
 		Taller musk = new Taller(340,100);
-		solucion.setBonos(greedy(familias, musk));
+		solucion.setBonos(pasadaPreferencial(familias,musk));
 		printCronograma(musk);
 		System.out.println("Bonos: $"+solucion.getBonos());
 		System.out.println("Familias asignadas: "+solucion.getFamilias());
 		System.out.println("Días completos: "+solucion.getDiasCompletos());
 		System.out.println("Días incompletos: "+solucion.getDiasIncompletos());
 	}
-	public static int greedy(ArrayList<Familia> familias, Taller taller) {
-		int bonos = 0;
+	public static int pasadaPreferencial(ArrayList<Familia> familias, Taller taller) {
+//		colocar a todos los que se puedan en su dia cero
 		ordenarPorMiembros(familias);
+		for(Familia f: familias) {//recorre las 5000 familias
+			int diaPrefe = f.diaPreferido();
+			Dia dia = taller.getDia(diaPrefe);
+			if(dia.aceptaFamilia(f)) {
+				dia.agregarFamilia(f);
+				f.asignarDia(dia.getId());
+				solucion.setFamilias(1);
+			}
+		}
+		return pasadaBonificada(familias,taller);
+	}
+	public static int pasadaBonificada(ArrayList<Familia> familias, Taller taller) {
+		int bonos = 0;
 		for(Familia f: familias) {//recorre las 5000 familias
 			int i = 0;
 			while(i < f.cantDiasPreferidos() && !f.estaAsignada()) {//recorre sus dias preferidos
@@ -25,13 +38,11 @@ public class MainFamilias {
 				if(dia.aceptaFamilia(f)) {
 					dia.agregarFamilia(f);
 					f.asignarDia(dia.getId());
-					bonos += f.calcularBono(dia.getId());
+					bonos += f.bono();
+					solucion.setFamilias(1);
 				}else {
 					i++;
 				}
-			}
-			if(f.estaAsignada()) {
-				solucion.setFamilias(1);
 			}
 		}
 		DiasIterator it = taller.diasIterator();
@@ -44,9 +55,6 @@ public class MainFamilias {
 			}
 		}
 		return bonos;
-	}
-	public static void mejora(Taller taller) {
-		
 	}
 	public static void printCronograma(Taller musk) {
 		System.out.println("<Cronograma>");
