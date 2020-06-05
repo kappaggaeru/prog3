@@ -8,11 +8,19 @@ public class MainFamilias {
 		ArrayList<Familia> familias = reader.read();
 		Taller musk = new Taller(340,100);
 		solucion.setBonos(greedy(familias, musk));
-		printCronograma(musk);
+//		printCronograma(musk);
 		System.out.println("Bonos: $"+solucion.getBonos());
 		System.out.println("Familias asignadas: "+solucion.getFamilias());
 		System.out.println("Días completos: "+solucion.getDiasCompletos());
 		System.out.println("Días incompletos: "+solucion.getDiasIncompletos());
+		
+		System.out.println("Familias con bono: "+familiasConBono(familias).size());
+		mejora(familiasConBono(familias), musk);
+		int bon = 0;
+		for(Familia f: familias) {
+			bon+= f.bono();
+		}
+		System.out.println("Bonos con mejora: "+bon);
 	}
 	public static int greedy(ArrayList<Familia> familias, Taller taller) {
 		int bonos = 0;
@@ -45,8 +53,46 @@ public class MainFamilias {
 		}
 		return bonos;
 	}
-	public static void mejora(Taller taller) {
-		
+	public static ArrayList<Familia> familiasConBono(ArrayList<Familia> familias){
+		ArrayList<Familia> res = new ArrayList<>();
+		for(Familia f:familias) {
+			if(f.bono() > 0) {
+				res.add(f);
+			}
+		}
+		return res;
+	}
+	public static void mejora(ArrayList<Familia> familias, Taller taller) {
+		for(int i=0;i<familias.size();i++) {
+			Familia f1= familias.get(i);
+			Dia dia1 = taller.getDia(f1.diaAsignado());
+			int j = i+1;
+			boolean cambio = true;
+			while(j<familias.size() && cambio) {
+				Familia f2 = familias.get(j);
+				Dia dia2 = taller.getDia(f2.diaAsignado());
+				if(f1.contieneDia(dia2.getId()) && f2.contieneDia(dia1.getId())) {
+					if(f1.bono() > f1.calcularBono(dia2.getId())){
+						dia2.removeFamilia(f2);
+						if(!intercambiarDias(f1,dia1,dia2))
+							dia2.aceptaFamilia(f2);
+//						que hago con la f2 que removi
+					}
+					if(f2.bono() > f2.calcularBono(dia1.getId())) {
+
+					}
+				}
+			}
+		}
+	}
+	public static boolean intercambiarDias(Familia f1, Dia dia1, Dia dia2) {
+		if(dia2.aceptaFamilia(f1)) {
+			dia1.removeFamilia(f1);
+			dia2.agregarFamilia(f1);
+			f1.asignarDia(dia2.getId());
+			return true;
+		}
+		return false;
 	}
 	public static void printCronograma(Taller musk) {
 		System.out.println("<Cronograma>");

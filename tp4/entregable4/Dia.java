@@ -41,4 +41,10 @@ public class Dia {
 	public int totalFamilias() {
 		return this.familias.size();
 	}
+	public void removeFamilia(Familia f) {
+		if(this.familias.contains(f)) {
+			this.familias.remove(f);
+			this.capacidad -= f.miembros();
+		}
+	}
 }
