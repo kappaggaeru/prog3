@@ -8,19 +8,19 @@ public class MainFamilias {
 		ArrayList<Familia> familias = reader.read();
 		Taller musk = new Taller(340,100);
 		solucion.setBonos(greedy(familias, musk));
-//		printCronograma(musk);
+		printCronograma(musk);
 		System.out.println("Bonos: $"+solucion.getBonos());
 		System.out.println("Familias asignadas: "+solucion.getFamilias());
 		System.out.println("Días completos: "+solucion.getDiasCompletos());
 		System.out.println("Días incompletos: "+solucion.getDiasIncompletos());
 		
-		System.out.println("Familias con bono: "+familiasConBono(familias).size());
-		mejora(familiasConBono(familias), musk);
-		int bon = 0;
-		for(Familia f: familias) {
-			bon+= f.bono();
-		}
-		System.out.println("Bonos con mejora: "+bon);
+//		System.out.println("Familias con bono: "+familiasConBono(familias).size());
+//		mejora(familiasConBono(familias), musk);
+//		int bon = 0;
+//		for(Familia f: familias) {
+//			bon+= f.bono();
+//		}
+//		System.out.println("Bonos con mejora: "+bon);
 	}
 	public static int greedy(ArrayList<Familia> familias, Taller taller) {
 		int bonos = 0;
@@ -72,16 +72,23 @@ public class MainFamilias {
 				Familia f2 = familias.get(j);
 				Dia dia2 = taller.getDia(f2.diaAsignado());
 				if(f1.contieneDia(dia2.getId()) && f2.contieneDia(dia1.getId())) {
-					if(f1.bono() > f1.calcularBono(dia2.getId())){
+					int bonoF1 = f1.bono();
+					int bonoF2 = f2.bono();
+					int bonoAux1 = f1.calcularBono(dia2.getId());
+					int bonoAux2 = f2.calcularBono(dia1.getId());
+					if(bonoF1 > bonoAux1 && bonoF2 > bonoAux2){
+						dia1.removeFamilia(f1);
 						dia2.removeFamilia(f2);
-						if(!intercambiarDias(f1,dia1,dia2))
-							dia2.aceptaFamilia(f2);
-//						que hago con la f2 que removi
+						if(intercambiarDias(f1,dia1,dia2) && intercambiarDias(f2,dia2,dia1)) {
+							cambio = false;
+						}else {
+							dia1.agregarFamilia(f1);
+							dia2.agregarFamilia(f2);
+						}
 					}
-					if(f2.bono() > f2.calcularBono(dia1.getId())) {
 
-					}
 				}
+				j++;
 			}
 		}
 	}
