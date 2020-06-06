@@ -15,7 +15,7 @@ public class MainFamilias {
 		System.out.println("Días incompletos: "+solucion.getDiasIncompletos());
 	}
 	public static int pasadaPreferencial(ArrayList<Familia> familias, Taller taller) {
-//		colocar a todos los que se puedan en su dia cero
+		ArrayList<Familia> res = new ArrayList<>();
 		ordenarPorMiembros(familias);
 		for(Familia f: familias) {//recorre las 5000 familias
 			int diaPrefe = f.diaPreferido();
@@ -24,9 +24,11 @@ public class MainFamilias {
 				dia.agregarFamilia(f);
 				f.asignarDia(dia.getId());
 				solucion.setFamilias(1);
+			}else {
+				res.add(f);
 			}
 		}
-		return pasadaBonificada(familias,taller);
+		return pasadaBonificada(res,taller);
 	}
 	public static int pasadaBonificada(ArrayList<Familia> familias, Taller taller) {
 		int bonos = 0;

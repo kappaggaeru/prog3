@@ -50,8 +50,10 @@ public class Main {
 		
 		int n = (int)(Math.random()*40)+1;
 		Tree treeRandom = new Tree(n);
-		generateNums(treeRandom,15,1,40);
-		System.out.println("\nprintPerOrder()");
+//		ya tiene un valor
+		System.out.println();
+		generateNums(treeRandom,14,1,40);
+		System.out.println("\nprintPreOrder()");
 		treeRandom.printPreOrder();
 	}
 	public static void printList(ArrayList<Integer> list) {
@@ -62,14 +64,21 @@ public class Main {
 //	Una función que permita generar un árbol al azar de 15 nodos con valores no
 //	repetidos entre 1 y 40.
 	public static void generateNums(Tree tree,int nodes,int min,int max) {
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		System.out.println("numero al azar");
+		System.out.print(tree.getValue() + " ");
 		int i = 0;
 		while(i < nodes) {
 			int n = (int)((Math.random()*max)+min);
-			if(!tree.hasElem(n)) {
-				tree.add(n);
+			if(!arr.contains(n)) {
+				arr.add(n);
 				i++;
 			}
 		}
-		
+		for(int item: arr) {
+			System.out.print(item + " ");
+			tree.add(item);
+		}
+		System.out.println();
 	}
 }
