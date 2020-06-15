@@ -26,15 +26,16 @@ public class MainFamilias {
 				solucion.setFamilias(1);
 			}else {
 				res.add(f);
+//				agrega las familias que quedaron fuera de la 1er selección
 			}
 		}
 		return pasadaBonificada(res,taller);
 	}
 	public static int pasadaBonificada(ArrayList<Familia> familias, Taller taller) {
 		int bonos = 0;
-		for(Familia f: familias) {//recorre las 5000 familias
+		for(Familia f: familias) {
 			int i = 0;
-			while(i < f.cantDiasPreferidos() && !f.estaAsignada()) {//recorre sus dias preferidos
+			while(i < f.cantDiasPreferidos() && !f.estaAsignada()) {
 				int diaPrefe = f.preferenciaEn(i);
 				Dia dia = taller.getDia(diaPrefe);
 				if(dia.aceptaFamilia(f)) {

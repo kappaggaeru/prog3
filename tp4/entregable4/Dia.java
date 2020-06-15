@@ -31,7 +31,7 @@ public class Dia {
 		return this.capacidad == this.maxCapacidad;
 	}
 	public boolean aceptaFamilia(Familia f) {
-		return (f.miembros() + this.capacidad < this.maxCapacidad) && 
+		return (f.miembros() + this.capacidad <= this.maxCapacidad) && 
 				(!this.familias.contains(f));
 	}
 	public FamiliasIterator familiasIterator() {
