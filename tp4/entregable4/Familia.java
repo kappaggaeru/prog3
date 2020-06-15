@@ -88,4 +88,11 @@ public class Familia {
 	public int bono() {
 		return this.calcularBono(this.diaAsignado);
 	}
+	public boolean contieneDia(int dia) {
+		for(int d: diasPreferidos) {
+			if(d == dia)
+				return true;
+		}
+		return false;
+	}
 }
