@@ -36,10 +36,16 @@ public class Dia {
 		return (f.miembros() + this.capacidad <= this.maxCapacidad) && 
 				(!this.familias.contains(f));
 	}
-//	public FamiliasIterator familiasIterator() {
-//		ArrayList<Familia> res = this.familias;
-//		return new FamiliasIterator(res);
-//	}
+	public void copiarDia(Dia original) {
+		this.capacidad = original.getCapacidad();
+		for(int i=0;i<original.totalFamilias();i++) {
+			Familia f = original.getFamilia(i);
+			this.familias.add(f);
+		}
+	}
+	private Familia getFamilia(int i) {
+		return this.familias.get(i);
+	}
 	public int totalFamilias() {
 		return this.familias.size();
 	}

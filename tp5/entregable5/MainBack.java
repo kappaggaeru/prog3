@@ -45,8 +45,12 @@ public class MainBack {
 					sol.setValor(bonosActual);
 					sol.setEstado(estados);
 					DiasIterator it = taller.diasIterator();
-					while(it.hasNext())
-						sol.sumarDia(it.next());
+					while(it.hasNext()) {
+						Dia real = it.next();
+						Dia copia = new Dia(real.maxCapacidad(),real.getId());
+						copia.copiarDia(real);
+						sol.addDia(copia);
+					}
 					solucion = sol;
 				}
 			}

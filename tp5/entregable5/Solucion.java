@@ -26,13 +26,13 @@ public class Solucion {
 	public void setEstado(int e) {
 		estados = e;
 	}
-	public void sumarDia(Dia d) {
+	public void addDia(Dia d) {
 		dias.add(d);
 	}
 	public void imprimir() {
 		for(Dia d:dias)
 			System.out.println("Día "+d.getId()+" Capacidad: "+d.getCapacidad()+"/"+d.maxCapacidad()+" Familias ["+d.familiasToString()+"]");
-		System.out.println("Bonos: "+valor);
+		System.out.println("Bonos: $"+valor);
 		System.out.println("Estados: "+estados);
 	}
 }
