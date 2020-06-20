@@ -7,8 +7,8 @@ public class MainBack {
 	static Solucion solucion = new Solucion();
 	static int bono = 0;
 	public static void main(String[] args) {
-//		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-1.csv");
-		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-2.csv");
+		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-1.csv");
+//		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-2.csv");
 		ArrayList<Familia> familias = reader.read();
 		ordenarPorMiembros(familias);
 		Taller taller = new Taller(30,10);
