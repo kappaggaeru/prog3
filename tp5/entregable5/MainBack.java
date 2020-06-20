@@ -7,27 +7,14 @@ public class MainBack {
 	static Solucion solucion = new Solucion();
 	static int bono = 0;
 	public static void main(String[] args) {
-		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-1.csv");
+//		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-1.csv");
+		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-2.csv");
 		ArrayList<Familia> familias = reader.read();
 		ordenarPorMiembros(familias);
 		Taller taller = new Taller(30,10);
-//		int miembros = 0;
-//		for (Familia familia: familias) {
-//			System.out.println(familia);
-//			miembros += familia.miembros();
-//		}
-//		System.out.println("Total miembros: "+miembros);
-		
 		probarTodas(taller,familias);
 		solucion.imprimir();
-		
-//		Solucion mejor = mejorSolucion();
-//		System.out.println("Bonos: "+mejor.valor());
-
-//		CSVReader reader2 = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-2.csv");
-//		ArrayList<Familia> familias2 = reader2.read();
-//		for (Familia familia: familias2)
-//			System.out.println(familia);
+	
 	}
 	public static void probarTodas(Taller taller,ArrayList<Familia> familias) {
 		for(Familia f:familias) {
@@ -96,23 +83,6 @@ public class MainBack {
 		}
 		return true;
 	}
-//	public static Solucion mejorSolucion() {
-//		int mejor = 999;
-//		Solucion res = new Solucion();
-//		for(Solucion s:soluciones) {
-//			if(s.valor() < mejor) {
-//				mejor = s.valor();
-//				res = s;
-//			}
-//		}
-//		return res;
-//	}
-//	public static void printSoluciones() {
-//		System.out.println(soluciones.size());
-//		for(Solucion s:soluciones) {
-//			s.imprimir();
-//		}
-//	}
 	public static void ordenarPorMiembros(ArrayList<Familia> familias) {
 		Collections.sort(familias, new SortMiembros());
 	}
