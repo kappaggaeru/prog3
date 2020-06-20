@@ -1,5 +1,7 @@
-package entregable4;
+package entregable5;
+
 import java.util.ArrayList;
+
 public class Dia {
 	private int id;
 	private int capacidad;
@@ -34,10 +36,10 @@ public class Dia {
 		return (f.miembros() + this.capacidad <= this.maxCapacidad) && 
 				(!this.familias.contains(f));
 	}
-	public FamiliasIterator familiasIterator() {
-		ArrayList<Familia> res = this.familias;
-		return new FamiliasIterator(res);
-	}
+//	public FamiliasIterator familiasIterator() {
+//		ArrayList<Familia> res = this.familias;
+//		return new FamiliasIterator(res);
+//	}
 	public int totalFamilias() {
 		return this.familias.size();
 	}
@@ -46,5 +48,12 @@ public class Dia {
 			this.familias.remove(f);
 			this.capacidad -= f.miembros();
 		}
+	}
+	public String familiasToString() {
+		String res = "";
+		for(Familia f:familias) {
+			res += f.getId()+" ";
+		}
+		return res;
 	}
 }
