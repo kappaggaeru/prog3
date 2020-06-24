@@ -33,6 +33,6 @@ public class Solucion {
 		for(Dia d:dias)
 			System.out.println("Día "+d.getId()+" Capacidad: "+d.getCapacidad()+"/"+d.maxCapacidad()+" Familias ["+d.familiasToString()+"]");
 		System.out.println("Bonos: $"+valor);
-		System.out.println("Estados: "+estados);
+		System.out.println("Estados al momento de encontrar la solución: "+estados);
 	}
 }

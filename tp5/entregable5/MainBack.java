@@ -5,15 +5,18 @@ import java.util.Collections;
 public class MainBack {
 	static int estados = 0;
 	static Solucion solucion = new Solucion();
-	static int bono = 0;
+	static long bono = 0L;
 	public static void main(String[] args) {
-		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-1.csv");
+//		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-1.csv");
 //		CSVReader reader = new CSVReader("/home/kappaggaeru/eclipse-workspace/Programacion3/data/familias-2.csv");
+		CSVReader reader = new CSVReader("./data/familias-1.csv");
+//		CSVReader reader = new CSVReader("./data/familias-2.csv");
 		ArrayList<Familia> familias = reader.read();
 		ordenarPorMiembros(familias);
 		Taller taller = new Taller(30,10);
 		probarTodas(taller,familias);
 		solucion.imprimir();
+		System.out.println("Estados totales: "+estados);
 	
 	}
 	public static void probarTodas(Taller taller,ArrayList<Familia> familias) {

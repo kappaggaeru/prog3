@@ -23,11 +23,12 @@ En un estado se avanza la recursión asignando una familia a un día en particul
 La poda tiene como condición que el bono que se está generando actualmente no supere al menor bono encontrado hasta el momento, de forma que el algoritmo no explore ramas que no pertenezcan a la solución del problema.
 #### Estados:
 
-||Dataset1|Dataset2
--|-|-
-Sin poda|921935|*
-Con poda|156127|71987
+||Sin poda|Con poda|Solución
+-|-|-|-
+Dataset1|574076845|11573900|156127|
+Dataset2|*|*|71987
 
 *No lo hice porque tardaba mucho ;D
+**Se pasó a un valor negativo porque excedió el límite del tipo de dato
 
 
