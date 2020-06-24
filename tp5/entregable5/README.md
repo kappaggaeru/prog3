@@ -8,6 +8,7 @@ Considero como estado inicial el recorrido de las familias, ya que cada familia 
 ### Criterio de ramificación:
 Siguiendo un criterio tal que todas las familias se las va a considerar asignarlas primero que las demás familias, ejemplo: se va a considerar que la cuarta familia sea la primera a la que se le asigne un día.
 La ramificación se la puede ver como si esta estuviera al revés, tomando como ejemplo un dataset con 3 familias:
+
 `1,1,1 -> 1,1,2 -> 1,1,3 -> 1,2,1 -> 1,2,2 -> 1,2,3 -> 1,3,1 -> 1,3,2 -> 1,3,3 ... n,n,n.`
 ### Profundidad del árbol:
 La profundidad se mide teniendo en cuenta la cantidad de estados de cada familia, y el producto de que por cada estado de una familia existen n-1 estados posibles en las familias restantes.
@@ -25,7 +26,7 @@ La poda tiene como condición que el bono que se está generando actualmente no 
 ||Dataset1|Dataset2
 -|-|-
 Sin poda|921935|*
-Con poda|156127|*
+Con poda|156127|71987
 
 *No lo hice porque tardaba mucho ;D
 
