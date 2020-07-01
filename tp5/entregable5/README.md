@@ -29,6 +29,24 @@ Dataset1|574076845|11573900|156127|
 Dataset2|*|*|71987
 
 *No lo hice porque tardaba mucho ;D
-**Se pasó a un valor negativo porque excedió el límite del tipo de dato
 
+## Correcciones
 
+ - Se eliminó la función *probarTodas*
+ - Se modificó la condición de la poda desde **>** a **>=**
+ - Se modificó el tipo de dato de la variable *estados* de un **int** a un **long**
+ - Se agregó una condición para comprobar la capacidad del día antes de verificar si admite a una familia
+ - Se cambió la línea dónde se hace la poda
+ - La búsqueda de una familia se hace con un id en lugar de con un recorrido
+ - La comprobación de que todas las familias fueron asignadas se realiza con un contador en lugar de con un recorrido
+
+### Nuevos valores
+||Sin poda|Con poda
+|-|-|-
+|Dataset 1|29.765.573|695.894
+|Dataset 2|*|50.866.131
+
+*Probablemente no termine
+
+### Observaciones
+La ejecución del backtracking para el segundo dataset ya no requiere una espera de 15 minutos, sino una espera de 15 segundos.

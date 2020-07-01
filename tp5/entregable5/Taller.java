@@ -24,4 +24,7 @@ public class Taller {
 	public Dia getDia(int id) {
 		return this.dias.get(id-1);
 	}
+	public int getDiasDisponibles() {
+		return this.diasDisponibles;
+	}
 }

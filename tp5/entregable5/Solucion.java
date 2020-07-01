@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Solucion {
 	private int valor;
-	private int estados;
+	private long estados;
 	private ArrayList<Dia> dias;
 	public Solucion() {
 		valor = 9999;
-		estados = 0;
+		estados = 0L;
 		dias = new ArrayList<>();
 	}
 	public int valor() {
 		return valor;
 	}
-	public int estados() {
+	public long estados() {
 		return estados;
 	}
 	public ArrayList<Dia> dias(){
@@ -23,7 +23,7 @@ public class Solucion {
 	public void setValor(int v) {
 		valor = v;
 	}
-	public void setEstado(int e) {
+	public void setEstado(long e) {
 		estados = e;
 	}
 	public void addDia(Dia d) {
